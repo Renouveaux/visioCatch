@@ -1,0 +1,124 @@
+ <div class="col-md-12">
+
+
+ 	<div class="box">
+ 		<div class="box-header">
+ 			<h3 class="box-title">Configuration de l'application</h3>
+ 		</div>
+
+
+ 		<div class="box-body ">
+ 			<div class="row">
+
+ 				<div class="col-md-5">
+ 					<div class="panel panel-info">
+ 						<div class="panel-heading">
+ 							<h4 class="text-center">
+ 								Paramètre du port</h4>
+ 							</div>
+ 							<div class="table-responsive form-group">
+ 								<table class="table">
+ 									<tr>
+ 										<td>
+ 											<a class="text-green" href="#">Port Com</a>
+ 										</td>
+ 										<td>
+
+ 											<select class="form-control" ng-model="portName" ng-options="data.comName as data.comName for data in comPort"></select>
+ 										</td>
+ 									</tr>
+
+ 									<tr>
+ 										<td>
+ 											<a class="text-green" href="#">Bits par seconde</a>
+ 										</td>
+ 										<td>
+ 											<input type="text" class="form-control" ng-model="settings.baudrate " placeholder="9600">
+ 										</td>
+ 									</tr>
+
+ 									<tr>
+ 										<td>
+ 											<a class="text-green" href="#">Bits de données</a>
+ 										</td>
+ 										<td>
+ 											<input type="number" class="form-control" ng-model="settings.databits" placeholder="Défaut 8">
+ 										</td>
+ 									</tr>
+
+ 									<tr>
+ 										<td>
+ 											<a class="text-green" href="#">Parité</a>
+ 										</td>
+ 										<td>
+ 											<select class="form-control" ng-model="settings.parity">
+ 												<option value="even">Pair</option>
+ 												<option value="odd">Impair</option>
+ 												<option value="none">Aucune</option>
+ 												<option value="mark">Marque</option>
+ 												<option value="space">Espace</option>
+ 											</select>
+ 										</td>
+ 									</tr>
+
+ 									<tr>
+ 										<td>
+ 											<a class="text-green" href="#">Bits d'arrêt</a>
+ 										</td>
+ 										<td>
+ 											<input type="number" class="form-control" ng-model="settings.stopbits" placeholder="1, 1.5, 2">
+ 										</td>
+ 									</tr>
+
+ 									<tr>
+ 										<td>
+ 											<a class="text-green" href="#">Taille du buffer</a>
+ 										</td>
+ 										<td>
+ 											<input type="number" class="form-control" ng-model="settings.buffersize" placeholder="1024">
+ 										</td>
+ 									</tr>
+
+ 								</table>
+ 							</div>
+ 						</div>
+
+ 						<button class="btn btn-success btn-sm" href="#" ng-click="apply()">Appliquer</button>
+ 						<button class="btn btn-warning btn-sm" href="#" ng-click="open()" ng-hide="portStatus">OpenPort</button>
+ 						<button class="btn btn-warning btn-sm" href="#" ng-click="close()" ng-show="portStatus">ClosePort</button>
+ 						<button class="btn btn-primary btn-sm pull-right" href="#" ng-click="setDefault()">Par défaut</button>
+ 					</div>
+
+
+ 					<div class="col-md-7">
+ 						<div class="panel panel-info">
+ 							<div class="panel-heading">
+ 								<h4 class="text-center">
+ 									Donnée brutes</h4>
+ 								</div>
+ 								<div class="panel-body console" style="min-height: 300px;">
+ 									<pre>
+ 										<code>
+ 											{{serialData}}
+ 										</code>
+ 									</pre>
+ 								</div>
+ 							</div>
+ 						</div>
+
+
+
+
+ 					</div>
+ 				</div>
+ 			</div>
+
+ 			<div class="box-footer hide">
+ 				<button class="btn btn-success btn-sm pull-right" href="#" ng-click="test()">Sauvegarder</button>
+ 			</div>
+
+
+ 		</div>
+
+ 	</div>
+

@@ -1,0 +1,79 @@
+<!doctype html>
+<html ng-app="visioCatch">
+<head>
+    <meta charset="utf-8">
+    <title>VisioCatch</title>
+
+    <link href="./stylesheets/main.css" rel="stylesheet" type="text/css">
+
+    <script src="vendor/electron_boilerplate/env_config.js"></script>
+    <script src="vendor/electron_boilerplate/context_menu.js"></script>
+    <script src="vendor/electron_boilerplate/external_links.js"></script>
+
+</head>
+<body class="main-theme ">
+
+    <header class="header ">
+        <nav class="navbar navbar-static-top hide" role="navigation">
+            Je peu éventuellement mettre du texte ici
+        </nav>
+    </header>
+        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':{ 'toast-warning': true, 'toast-error': false }}"></toaster-container>
+
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="hidden-xs leftmenu sidebar-offcanvas">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="image-avatar image">
+                        <img src="icon.png"/>
+                    </div>
+                    <div class="info">
+                        <ul class="profile-list">
+                            <li>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile">
+                                    <span data-toggle="modal" data-target="#myModal"><i class="fontello-user-outline"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="settings" data-toggle="tooltip" data-placement="top" title="Setting">
+                                    <span data-toggle="modal" data-target="#setting"><i class="fontello-wrench-outline"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+
+        <aside class="right-side">
+            <section class="content">
+
+                <div class="row" ui-view ></div>
+
+            </section>
+
+            <footer id="footer">
+                <span class="iconsocial">
+                    <a href="#"> 2015 - 2016 </a>
+                </span>
+                <b>visiocatch 0.1.0 - Renouveaux Inc</b>
+            </footer>
+        </aside>
+
+
+    </div>
+
+
+
+    <script src="app.js"></script>
+
+    <!-- build:remove -->
+    <script src="http://localhost:35829/browser-sync/browser-sync-client.2.10.0.js"></script>
+    <!-- endbuild -->
+
+</body>
+</html>

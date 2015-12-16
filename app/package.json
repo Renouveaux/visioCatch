@@ -1,0 +1,28 @@
+{
+  "name": "visiocatch",
+  "productName": "visioCatch",
+  "description": "Permet la récupération de données série provenant de materiel d'orthoptie",
+  "version": "0.1.0",
+  "author": "Yannick PERON <renouveaux@gmail.com>",
+  "main": "background.js",
+  "config": {
+    "target": "development"
+  },
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8",
+    "angular-bootstrap": "^0.12.2",
+    "angular-electron": "^0.2.0",
+    "angular-sanitize": "^1.4.8",
+    "angular-ui-router": "^0.2.15",
+    "angularjs-toaster": "^0.4.15",
+    "clipboard": "^1.5.5",
+    "electron-prebuilt": "^0.35.2",
+    "electron-toaster": "^2.0.1",
+    "fs-jetpack": "^0.7.0",
+    "ngclipboard": "^1.0.0"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.0.2"
+  }
+}
