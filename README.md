@@ -1,159 +1,74 @@
-electron-boilerplate
+VisioCatch
 ==============
-Comprehensive boilerplate application for [Electron runtime](http://electron.atom.io).  
+Une application simple de récupération de données ophtalmiques.
 
-Scope of this project:
+VisioCatch à pour simple but la récupération de données provenant d'équipements ophtalmique ou orthoptique, de traiter ses données afin de les copier simplement et avec une certaine structure.
 
-- Provide basic structure of the application so you can much easier grasp what should go where.
-- Give you cross-platform development environment, which works the same way on OSX, Windows and Linux.
-- Generate ready for distribution installers of your app for all supported operating systems.
+Pas de gestion de patient, ni de stockage des données n'est prévu pour cette application.
 
-NOT in the scope:
-
-- Imposing on you any framework (e.g. Angular, React). You can integrate the one which makes most sense for you.
-
-By the way, there is a twin project to this one: [nw-boilerplate](https://github.com/szwacz/nw-boilerplate), which is the same thing but for NW.js.
-
-# Quick start
-The only development dependency of this project is [Node.js](https://nodejs.org). So just make sure you have it installed.
-Then type few commands known to every Node developer...
+# Développer l'application
+Pour le développement de l'application, il est nécessaire d'avoir [Node.js](https://nodejs.org), mais aussi visual studio express web 2013 pour la compilation du module **serialPort**.
+**Gulp** doit aussi être installé en global
+Première partie d'installation
 ```
-git clone https://github.com/szwacz/electron-boilerplate.git
-cd electron-boilerplate
+git clone https://github.com/Renouveaux/visioCatch.git
+cd visioCatch
 npm install
-npm start
+npm install -g gulp
 ```
-... and boom! You have running desktop application on your screen.
-
-# Structure of the project
-
-There are **two** `package.json` files:  
-
-#### 1. For development
-Sits on path: `electron-boilerplate/package.json`. Here you declare dependencies for your development environment and build scripts. **This file is not distributed with real application!**
-
-Also here you declare the version of Electron runtime you want to use:
-```json
-"devDependencies": {
-  "electron-prebuilt": "^0.24.0"
-}
-```
-
-#### 2. For your application
-Sits on path: `electron-boilerplate/app/package.json`. This is **real** manifest of your application. Declare your app dependencies here.
-
-#### OMG, but seriously why there are two `package.json`?
-1. Native npm modules (those written in C, not JavaScript) need to be compiled, and here we have two different compilation targets for them. Those used in application need to be compiled against electron runtime, and all `devDependencies` need to be compiled against your locally installed node.js. Thanks to having two files this is trivial.
-2. When you package the app for distribution there is no need to add up to size of the app with your `devDependencies`. Here those are always not included (because reside outside the `app` directory).
-
-### Project's folders
-
-- `app` - code of your application goes here.
-- `config` - place for you to declare environment specific stuff.
-- `build` - in this folder lands built, runnable application.
-- `releases` - ready for distribution installers will land here.
-- `resources` - resources for particular operating system.
-- `tasks` - build and development environment scripts.
-
-
-# Development
-
-#### Installation
-
-```
-npm install
-```
-It will also download Electron runtime, and install dependencies for second `package.json` file inside `app` folder.
-
-#### Starting the app
-
-```
-npm start
-```
-
-#### Adding pure-js npm modules to your app
-
-Remember to add your dependency to `app/package.json` file, so do:
+A partir de là, l'application n'est pas complètement installée. La partie la plus dure est l'installation de serial port. Pour ce faire, il faut ce rendre dans le dossier **app**, installer **serialport**, récupérer le nom du dossier de compilation. Utiliser **electron-rebuilt**, puis remodifier le nom du dossier de compilation de **serialport**.
+Compliqué tous cela.
 ```
 cd app
-npm install name_of_npm_module --save
+npm install serialport
+```
+Une fois finit, se rendre dans l’explorer au chemin suivant :  **app/node_modules/serialport/build/Release**
+Dans ce répertoire, n'est présent qu'un seul dossier dont le nom contient node-vxx-win-arch. Il faut copier le nom de ce dossier pour le rappliquer par la suite. 
+on reprend dans la console ***Toujours depuis le dossier app ***
+```
+$ node_modules\.bin\electron-rebuild.cmd .
+```
+La compilation des différents modules se lance exclusivement pour l'utilisation avec electron.
+Une fois la compilation terminée, il vous faut retourner dans le dossier **Release** afin de renommer le dossier avec le nom précédemment copié.
+
+L'application est maintenant prêt pour utilisation. On reviens à la racine de cette dernière, puis on lance la commande start.
+```
+cd ../
+npm start
 ```
 
-#### Adding native npm modules to your app
+# Packager l'application
+Les icons de l'application sont présentes dans le dossier `ressources`. Ces icons sont utilisées pour l'installeur ainsi que pour l'application elle même.
 
-If you want to install native module you need to compile it agains Electron, not Node.js you are firing in command line by typing `npm install` [(Read more)](https://github.com/atom/electron/blob/master/docs/tutorial/using-native-node-modules.md).
-```
-npm run app-install -- name_of_npm_module
-```
-Of course this method works also for pure-js modules, so you can use it all the time if you're able to remember such an ugly command.
-
-#### Working with modules
-
-Electron ecosystem (because it's a merge of node.js and browser) gives you a little trouble while working with modules. ES6 modules have nice syntax and are the future, so they're utilized in this project (thanks to [rollup](https://github.com/rollup/rollup)). But at the same time node.js and npm still rely on the CommonJS syntax. So in this project you need to use both:
-```js
-// Modules which you authored in this project are intended to be
-// imported through new ES6 syntax.
-import { myStuff } from './my_lib/my_stuff';
-
-// Node.js modules are loaded the old way with require().
-var fs = require('fs');
-
-// And all modules which you installed from npm
-// also need to be required.
-var moment = require('moment');
-```
-
-#### Unit tests
-
-electron-boilerplate has preconfigured [jasmine](http://jasmine.github.io/2.0/introduction.html) unit test runner. To run it go with standard:
-```
-npm test
-```
-You don't have to declare paths to spec files in any particular place. The runner will search through the project for all `*.spec.js` files and include them automatically.
-
-
-# Making a release
-
-**Note:** There are various icon and bitmap files in `resources` directory. Those are used in installers and are intended to be replaced by your own graphics.
-
-To make ready for distribution installer use command:
+Pour packager l'application, la commande suivante suffira:
 ```
 npm run release
 ```
-It will start the packaging process for operating system you are running this command on. Ready for distribution file will be outputted to `releases` directory.
+Cela va empaqueter l'application, le résultat se trouvera dans le dossier `release`, et builder selon l'OS sur lequel vous vous trouver.
+L'application n'est tester que sur windows.
 
-You can create Windows installer only when running on Windows, the same is true for Linux and OSX. So to generate all three installers you need all three operating systems.
 
-## Mac only
-
-#### App signing
-
-The Mac release supports [code signing](https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html). To sign the `.app` in the release image, include the certificate ID in the command as so,
-```
-npm run release -- --sign A123456789
-```
-
-## Windows only
+## Windows
 
 #### Installer
 
-The installer is built using [NSIS](http://nsis.sourceforge.net). You have to install NSIS version 3.0, and add its folder to PATH in Environment Variables, so it is reachable to scripts in this project. For example, `C:\Program Files (x86)\NSIS`.
+L'installaleur utilise l'outils [NSIS](http://nsis.sourceforge.net), pour la création du setup. Vous devrez donc installer la version 3.0 de NSIS et ajouter son dossier au PATH de votre système afin que la commande release fonctionne. `C:\Program Files (x86)\NSIS`.
 
 #### 32-bit build on 64-bit Windows
 
-There are still a lot of 32-bit Windows installations in use. If you want to support those systems and have 64-bit OS on your machine you need to manually force npm to install all packages for 32-bit. Npm allowes to do that via environment variable:
+Pour la génération d'une application spécifique 32 bits, il vous faudra spécifier à node l'architecture du système que vous souhaitez.
+Une fois cela fait, vous devrez réinstaller tous les modules si vous l'aviez déjà fait, afin de node charge les packages en 32 bits, mais aussi que serialport soit compiler en 32 bits.
 ```
 SET npm_config_arch=ia32
 rmdir /S node_modules
 npm install
 ```
-Note: This snippet deletes whole `node_modules` folder assuming you already had run `npm install` in the past (then fresh install is required for the trick to work).
 
 # License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Jakub Szwacz
+Copyright (c) 2015 Renouveaux
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
