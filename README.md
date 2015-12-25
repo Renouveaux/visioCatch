@@ -6,6 +6,15 @@ VisioCatch à pour simple but la récupération de données provenant d'équipem
 
 Pas de gestion de patient, ni de stockage des données n'est prévu pour cette application.
 
+# Télécharger l'application
+
+L'application n'est buildé que pour windows, et je le fait en 32 bits pour les problèmes de compatibilités d'installation sur des OS en 32 bits seulement.
+N'ayant pas encore trouvé de solution pour faire des builds 32/64.
+
+Vous pouvez télécharger l'application ici [visioCatch](https://).
+Pour partir sur de bonnes bases, si vous avez déjà installé une version précédente, désinstallez là, puis supprimer le dossier **visioCatch** présent dans le répertoire `c:\ProgramData\visioCatch`
+
+
 # Développer l'application
 Pour le développement de l'application, il est nécessaire d'avoir [Node.js](https://nodejs.org), mais aussi visual studio express web 2013 pour la compilation du module **serialPort**.
 **Gulp** doit aussi être installé en global
@@ -24,7 +33,7 @@ npm install serialport
 ```
 Une fois finit, se rendre dans l’explorer au chemin suivant :  **app/node_modules/serialport/build/Release**
 Dans ce répertoire, n'est présent qu'un seul dossier dont le nom contient node-vxx-win-arch. Il faut copier le nom de ce dossier pour le rappliquer par la suite. 
-on reprend dans la console ***Toujours depuis le dossier app ***
+on reprend dans la console ***Toujours depuis le dossier app***
 ```
 $ node_modules\.bin\electron-rebuild.cmd .
 ```
