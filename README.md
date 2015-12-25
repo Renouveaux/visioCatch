@@ -12,7 +12,7 @@ L'application n'est buildé que pour windows, et je le fait en 32 bits pour les 
 N'ayant pas encore trouvé de solution pour faire des builds 32/64.
 
 Vous pouvez télécharger l'application ici [visioCatch](https://github.com/Renouveaux/visioCatch/blob/master/releases/visiocatch_0.1.0.exe).
-Pour partir sur de bonnes bases, si vous avez déjà installé une version précédente, désinstallez là, puis supprimer le dossier **visioCatch** présent dans le répertoire `c:\ProgramData\visioCatch`
+Pour partir sur de bonnes bases, si vous avez déjà installé une version précédente, désinstallez là, puis supprimer le dossier **visioCatch** présent dans le répertoire `c:\ProgramData\`
 
 
 # Développer l'application
